@@ -1,73 +1,57 @@
-# React + TypeScript + Vite
+# Render — Live Markdown Editor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fast, browser-based markdown editor with a live preview, built with React, TypeScript, and Vite.
 
-Currently, two official plugins are available:
+**Live demo:** https://manoo07.github.io/Render/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Live split view** — write markdown on the left, see the rendered result instantly on the right, with a draggable divider to resize the panes
+- **Four view modes** — Split, Editor only, Preview only, and a distraction-free Read mode
+- **Keyboard shortcuts** — press `E` to jump into split/edit mode, `R` for read mode
+- **Formatting toolbar** — one-click headings, bold, italic, strikethrough, inline code, code blocks, blockquotes, and lists
+- **GitHub Flavored Markdown** — tables, task lists, strikethrough, and autolinks via `remark-gfm`
+- **Syntax highlighting** — fenced code blocks highlighted with `rehype-highlight`
+- **Mermaid diagrams** — render flowcharts, sequence diagrams, and more from ` ```mermaid ` code blocks
+- **Sanitized output** — HTML is sanitized with `rehype-sanitize` before rendering
+- **Auto-save** — your draft and view mode persist in `localStorage` across sessions
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite 8](https://vite.dev/) with [Tailwind CSS 4](https://tailwindcss.com/)
+- [react-markdown](https://github.com/remarkjs/react-markdown) with remark/rehype plugins
+- [Mermaid](https://mermaid.js.org/) for diagrams
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Requires Node.js 20+.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm ci        # install dependencies
+npm run dev   # start the dev server at http://localhost:5173
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Available Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| Command           | Description                                  |
+| ----------------- | -------------------------------------------- |
+| `npm run dev`     | Start the Vite dev server with HMR           |
+| `npm run build`   | Type-check and build for production (`dist`) |
+| `npm run preview` | Preview the production build locally         |
+| `npm run lint`    | Run ESLint                                   |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Structure
+
 ```
+src/
+├── components/       # Header, Toolbar, SplitView, editor, preview, Mermaid renderer
+├── context/          # EditorContext — content, view mode, keyboard shortcuts
+├── hooks/            # useLocalStorage
+├── constants/        # Default markdown content
+└── pages/            # EditorPage
+```
+
+## Deployment
+
+Every push to `main` triggers a GitHub Actions workflow ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)) that builds the app and deploys it to GitHub Pages. The Vite `base` is set to `/Render/` to match the repository name.
