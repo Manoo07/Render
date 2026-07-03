@@ -25,10 +25,8 @@ export default function Header() {
     <header className="h-14 flex items-center justify-between px-4 bg-white dark:bg-[#252526] border-b border-gray-200 dark:border-[#333333] shrink-0 shadow-sm">
       {/* Logo */}
       <div className="flex items-center gap-2">
-        <svg className="w-6 h-6 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.56 3.34A1 1 0 0 0 19.7 3H4.3a1 1 0 0 0-.86.34A1 1 0 0 0 3.21 4.2l7.7 15.4a1.18 1.18 0 0 0 2.18 0l7.7-15.4a1 1 0 0 0-.23-.86z" />
-        </svg>
-        <span className="font-semibold text-gray-900 dark:text-gray-100 text-sm hidden sm:block">Markdown Editor</span>
+        <LogoIcon />
+        <span className="font-bold text-gray-900 dark:text-gray-100 text-sm tracking-tight hidden sm:block">Render</span>
       </div>
 
       {/* View mode toggles */}
@@ -113,6 +111,29 @@ function MoonIcon() {
   return (
     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
+  )
+}
+
+function LogoIcon() {
+  return (
+    <svg className="w-6 h-6" viewBox="0 0 200 200" aria-label="Render logo">
+      <defs>
+        <clipPath id="logoRoundedSquare">
+          <rect x="0" y="0" width="200" height="200" rx="44" ry="44" />
+        </clipPath>
+      </defs>
+      <g clipPath="url(#logoRoundedSquare)">
+        <rect x="0" y="0" width="200" height="200" fill="#0D1117" />
+        <path d="M0,0 L200,0 L200,200 Z M112,44 L112,96 L158,70 Z" fill="#4F6BFF" fillRule="evenodd" />
+        <g stroke="#8FB8FF" strokeWidth="11" strokeLinecap="round">
+          <line x1="50" y1="112" x2="50" y2="160" />
+          <line x1="80" y1="112" x2="80" y2="160" />
+          <line x1="39" y1="124" x2="91" y2="124" />
+          <line x1="39" y1="148" x2="91" y2="148" />
+        </g>
+        <line x1="0" y1="0" x2="200" y2="200" stroke="#1B2130" strokeWidth="2" />
+      </g>
     </svg>
   )
 }
