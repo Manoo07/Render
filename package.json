@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://YOUR_GITHUB_USERNAME.github.io/render",
+  "homepage": "https://manoo07.github.io/render",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
