@@ -7,7 +7,7 @@ export default function EditorPage() {
   const { isReadMode } = useEditor()
 
   return (
-    <div className="flex flex-col h-full bg-gray-100">
+    <div className="flex flex-col h-full bg-gray-100 dark:bg-[#1e1e1e]">
       <Header />
 
       {isReadMode ? (
@@ -26,12 +26,12 @@ function ReadModeView() {
 
   return (
     <main className="flex-1 overflow-y-auto">
-      <div className="max-w-3xl mx-auto px-6 py-10">
-        <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-200">
-          <span className="text-xs font-semibold text-gray-400 uppercase tracking-widest">Read Mode</span>
+      <div className="max-w-6xl mx-auto px-8 py-10">
+        <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-200 dark:border-[#333333]">
+          <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">Read Mode</span>
           <button
             onClick={() => setViewMode('split')}
-            className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors"
+            className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round"

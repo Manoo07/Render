@@ -3,6 +3,7 @@ import { useLocalStorage } from '../hooks/useLocalStorage'
 import { DEFAULT_CONTENT } from '../constants/defaultContent'
 
 export type ViewMode = 'split' | 'editor' | 'preview' | 'read'
+export type Theme = 'light' | 'dark'
 
 interface EditorContextValue {
   content: string
@@ -10,6 +11,8 @@ interface EditorContextValue {
   viewMode: ViewMode
   setViewMode: (mode: ViewMode) => void
   isReadMode: boolean
+  theme: Theme
+  toggleTheme: () => void
 }
 
 const EditorContext = createContext<EditorContextValue | null>(null)
@@ -17,6 +20,11 @@ const EditorContext = createContext<EditorContextValue | null>(null)
 export function EditorProvider({ children }: { children: ReactNode }) {
   const [content, setContent] = useLocalStorage('md-editor-draft', DEFAULT_CONTENT)
   const [viewMode, setViewMode] = useLocalStorage<ViewMode>('md-editor-mode', 'split')
+  const [theme, setTheme] = useLocalStorage<Theme>('md-editor-theme', 'dark')
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark')
+  }, [theme])
 
   // Global keyboard shortcuts: E → edit (split), R → read
   useEffect(() => {
@@ -37,6 +45,8 @@ export function EditorProvider({ children }: { children: ReactNode }) {
       viewMode,
       setViewMode,
       isReadMode: viewMode === 'read',
+      theme,
+      toggleTheme: () => setTheme(theme === 'dark' ? 'light' : 'dark'),
     }}>
       {children}
     </EditorContext.Provider>

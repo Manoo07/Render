@@ -40,6 +40,21 @@ npm run deploy
 
 ---
 
+## Mermaid Diagrams
+
+Fenced \`mermaid\` code blocks render as diagrams:
+
+\`\`\`mermaid
+flowchart TD
+    A[Jira API error] --> B{HTTP status}
+    B -->|429| C[Defer SQS message]
+    B -->|502 503 504| D[Defer with backoff]
+    B -->|401 403| E[SDM: credentials expired]
+    B -->|Other| F[SDM: Jira API error]
+\`\`\`
+
+---
+
 ## Tables
 
 | Feature               | Status  | Notes                     |

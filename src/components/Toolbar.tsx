@@ -127,13 +127,13 @@ export default function Toolbar({ textareaRef }: { textareaRef: React.RefObject<
   }
 
   return (
-    <div className="flex items-center gap-0.5 px-3 py-1.5 bg-gray-50 border-b border-gray-200 flex-wrap">
+    <div className="flex items-center gap-0.5 px-3 py-1.5 bg-gray-50 dark:bg-[#252526] border-b border-gray-200 dark:border-[#333333] flex-wrap">
       {ACTIONS.map((action, i) => (
         <button
           key={i}
           title={action.title}
           onMouseDown={(e) => { e.preventDefault(); applyAction(action) }}
-          className="w-8 h-7 flex items-center justify-center rounded text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors text-sm"
+          className="w-8 h-7 flex items-center justify-center rounded text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-[#3c3c3c] hover:text-gray-900 dark:hover:text-gray-100 transition-colors text-sm"
         >
           {action.icon}
         </button>

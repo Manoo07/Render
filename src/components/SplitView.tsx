@@ -49,7 +49,7 @@ export default function SplitView() {
   return (
     <div ref={containerRef} className="flex h-full overflow-hidden select-none">
       {/* Editor pane */}
-      <div style={{ width: `${splitRatio}%` }} className="flex flex-col overflow-hidden border-r border-gray-200">
+      <div style={{ width: `${splitRatio}%` }} className="flex flex-col overflow-hidden border-r border-gray-200 dark:border-[#333333]">
         <PaneLabel label="Editor" />
         <div className="flex-1 overflow-hidden">
           <MarkdownEditor />
@@ -59,7 +59,7 @@ export default function SplitView() {
       {/* Drag handle */}
       <div
         onMouseDown={onMouseDown}
-        className="w-1 bg-gray-200 hover:bg-blue-400 cursor-col-resize transition-colors shrink-0 active:bg-blue-500"
+        className="w-1 bg-gray-200 dark:bg-[#333333] hover:bg-blue-400 dark:hover:bg-blue-500 cursor-col-resize transition-colors shrink-0 active:bg-blue-500"
         role="separator"
         aria-label="Resize editor and preview"
       />
@@ -77,7 +77,7 @@ export default function SplitView() {
 
 function PaneLabel({ label }: { label: string }) {
   return (
-    <div className="h-8 flex items-center px-4 bg-gray-50 border-b border-gray-200 shrink-0">
+    <div className="h-8 flex items-center px-4 bg-gray-50 dark:bg-[#252526] border-b border-gray-200 dark:border-[#333333] shrink-0">
       <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{label}</span>
     </div>
   )

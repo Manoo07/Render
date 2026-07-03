@@ -58,7 +58,7 @@ export default function MarkdownEditor() {
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           spellCheck
-          className="editor-textarea w-full h-full p-5 bg-white text-gray-800 border-0"
+          className="editor-textarea w-full h-full p-5 bg-white dark:bg-[#1e1e1e] text-gray-800 dark:text-[#d4d4d4] border-0"
           placeholder="Start writing Markdown…"
           aria-label="Markdown editor"
         />

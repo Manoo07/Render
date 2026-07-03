@@ -1,5 +1,8 @@
 import { useEditor, type ViewMode } from '../context/EditorContext'
 
+const OUTLINE_BTN =
+  'flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 dark:border-[#3c3c3c] text-gray-700 dark:text-gray-300 text-sm font-medium rounded-md hover:bg-gray-50 dark:hover:bg-[#333333] transition-colors'
+
 export default function Header() {
   const { viewMode, setViewMode, isReadMode } = useEditor()
 
@@ -11,7 +14,7 @@ export default function Header() {
         'px-3 py-1.5 rounded-md text-sm font-medium transition-colors',
         viewMode === mode
           ? 'bg-blue-600 text-white shadow-sm'
-          : 'text-gray-600 hover:bg-gray-100',
+          : 'text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-[#333333] dark:hover:text-gray-200',
       ].join(' ')}
     >
       {label}
@@ -19,17 +22,17 @@ export default function Header() {
   )
 
   return (
-    <header className="h-14 flex items-center justify-between px-4 bg-white border-b border-gray-200 shrink-0 shadow-sm">
+    <header className="h-14 flex items-center justify-between px-4 bg-white dark:bg-[#252526] border-b border-gray-200 dark:border-[#333333] shrink-0 shadow-sm">
       {/* Logo */}
       <div className="flex items-center gap-2">
         <svg className="w-6 h-6 text-blue-600" viewBox="0 0 24 24" fill="currentColor">
           <path d="M20.56 3.34A1 1 0 0 0 19.7 3H4.3a1 1 0 0 0-.86.34A1 1 0 0 0 3.21 4.2l7.7 15.4a1.18 1.18 0 0 0 2.18 0l7.7-15.4a1 1 0 0 0-.23-.86z" />
         </svg>
-        <span className="font-semibold text-gray-900 text-sm hidden sm:block">Markdown Editor</span>
+        <span className="font-semibold text-gray-900 dark:text-gray-100 text-sm hidden sm:block">Markdown Editor</span>
       </div>
 
       {/* View mode toggles */}
-      <div className="flex items-center gap-1 bg-gray-50 border border-gray-200 rounded-lg p-1">
+      <div className="flex items-center gap-1 bg-gray-50 dark:bg-[#1e1e1e] border border-gray-200 dark:border-[#333333] rounded-lg p-1">
         {modeBtn('split', 'Split', 'Split view (E)')}
         {modeBtn('editor', 'Editor', 'Editor only')}
         {modeBtn('preview', 'Preview', 'Preview only')}
@@ -49,12 +52,13 @@ export default function Header() {
         ) : (
           <button
             onClick={() => setViewMode('read')}
-            className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-50 transition-colors"
+            className={OUTLINE_BTN}
           >
             <EyeIcon />
             <span className="hidden sm:inline">Read mode</span>
           </button>
         )}
+        <ThemeToggle />
         <ExportButton />
       </div>
     </header>
@@ -75,14 +79,41 @@ function ExportButton() {
   }
 
   return (
-    <button
-      onClick={download}
-      title="Export as .md"
-      className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-50 transition-colors"
-    >
+    <button onClick={download} title="Export as .md" className={OUTLINE_BTN}>
       <DownloadIcon />
       <span className="hidden sm:inline">Export</span>
     </button>
+  )
+}
+
+function ThemeToggle() {
+  const { theme, toggleTheme } = useEditor()
+
+  return (
+    <button
+      onClick={toggleTheme}
+      title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+      className={OUTLINE_BTN}
+    >
+      {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+    </button>
+  )
+}
+
+function SunIcon() {
+  return (
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+      <circle cx="12" cy="12" r="4" />
+      <path strokeLinecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+    </svg>
+  )
+}
+
+function MoonIcon() {
+  return (
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
   )
 }
 

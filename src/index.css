@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "highlight.js/styles/atom-one-dark.css" layer(base);
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
 
@@ -15,6 +17,11 @@
     background-color: #f8f9fa;
     color: #1a1a2e;
     -webkit-font-smoothing: antialiased;
+  }
+
+  .dark body {
+    background-color: #1e1e1e;
+    color: #cccccc;
   }
 }
 
@@ -160,6 +167,61 @@
   margin: 2rem 0;
 }
 
+/* ── Dark prose (Cursor / VS Code preview style) ── */
+.dark .prose { color: #cccccc; }
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4 {
+  color: #e8e8e8;
+  border-bottom-color: #333333;
+}
+.dark .prose p,
+.dark .prose li { color: #c5c5c5; }
+
+.dark .prose a { color: #4daafc; }
+.dark .prose a:hover { color: #71bdff; }
+
+.dark .prose ul li input[type="checkbox"] { accent-color: #4daafc; }
+
+.dark .prose blockquote {
+  border-left-color: #4daafc;
+  background: rgba(77, 170, 252, 0.06);
+  color: #a8a8a8;
+}
+.dark .prose blockquote p { color: #a8a8a8; }
+
+.dark .prose :not(pre) > code {
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  color: #e0e0e0;
+  padding: .15em .45em;
+  border-radius: .25rem;
+}
+
+.dark .prose pre {
+  background: #252526 !important;
+  border: 1px solid #333333;
+  box-shadow: none;
+}
+.dark .prose pre code { color: #d4d4d4; }
+
+.dark .prose table { border-color: #3c3c3c; }
+.dark .prose th {
+  background: #2a2a2b;
+  border-bottom-color: #3c3c3c;
+  color: #e8e8e8;
+}
+.dark .prose td {
+  border-bottom-color: #333333;
+  color: #c5c5c5;
+}
+.dark .prose tr:hover td { background: #262627; }
+
+.dark .prose hr { border-top-color: #3c3c3c; }
+
+.dark .prose img { box-shadow: 0 2px 8px rgba(0,0,0,.4); }
+
 /* ── Editor textarea ── */
 .editor-textarea {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
@@ -171,8 +233,12 @@
   caret-color: #0069ff;
 }
 
+.dark .editor-textarea { caret-color: #4daafc; }
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+.dark ::-webkit-scrollbar-thumb { background: #424242; }
+.dark ::-webkit-scrollbar-thumb:hover { background: #555555; }

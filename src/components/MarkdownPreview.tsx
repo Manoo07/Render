@@ -54,7 +54,7 @@ export default function MarkdownPreview({ scrollable = true }: Props) {
   const { content } = useEditor()
 
   return (
-    <div className={`bg-white h-full ${scrollable ? 'overflow-y-auto' : ''}`}>
+    <div className={`bg-white dark:bg-[#1e1e1e] h-full ${scrollable ? 'overflow-y-auto' : ''}`}>
       <article className="prose px-6 py-5 max-w-none">
         <Markdown
           remarkPlugins={[remarkGfm]}
